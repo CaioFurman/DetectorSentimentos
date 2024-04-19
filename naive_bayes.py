@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report
@@ -32,3 +32,9 @@ print("Precisão:", accuracy)
 # Exibir o relatório de classificação
 print("\nRelatório de Classificação:")
 print(classification_report(y_test, predictions))
+
+# Avaliar o modelo com validação cruzada
+cv_scores = cross_val_score(clf, X_train_counts, y_train, cv=5)
+print("\nValidação Cruzada - Pontuações:")
+print(cv_scores)
+print("Precisão Média:", cv_scores.mean())
